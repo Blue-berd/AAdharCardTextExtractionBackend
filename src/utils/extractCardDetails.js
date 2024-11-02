@@ -27,7 +27,6 @@ module.exports = async function extractAadhaarDetails(text) {
 
     dob = extractDOB(lines[dobIndex]);
 
-    // Extract Gender (line below DOB)
     if (dobIndex < lines.length - 1) {
       gender = extractGender(lines[dobIndex + 1]);
     }
