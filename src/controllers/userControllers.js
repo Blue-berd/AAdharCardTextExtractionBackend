@@ -17,17 +17,14 @@ const uploadFile = async (req, res) => {
 
     Tesseract.recognize(processedImageBuffer, "eng")
       .then(async ({ data: { text } }) => {
-        console.log("Extracted Text:", text);
         const details = await extractAadhaarDetails(text);
 
-        res.status(201).send({ success: true, details, status_code: 201 });
+        return res.status(201).send({ success: true, details, status_code: 201 });
       })
       .catch((error) => {
-        console.error("OCR Failed:", error);
         res.status(500).send({ success: false, message: "OCR Failed", error });
       });
   } catch (error) {
-    console.error("Image Processing Failed:", error);
     res
       .status(500)
       .send({ success: false, message: "Image Processing Failed", error });
